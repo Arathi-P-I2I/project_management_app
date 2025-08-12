@@ -34,8 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "rimraf": "^5.0.5",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0",
+
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1",
     "zod": "^3.22.4"
@@ -48,7 +47,7 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.9.0",
-    "@types/swagger-jsdoc": "^6.0.4",
+
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
     "eslint": "^8.54.0",

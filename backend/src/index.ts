@@ -21,8 +21,7 @@ import userRoutes from './routes/user.routes';
 import projectRoutes from './routes/project.routes';
 import taskRoutes from './routes/task.routes';
 
-// Import Swagger
-import { specs, swaggerUi, swaggerUiOptions } from './config/swagger';
+
 
 // Import error handling
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
@@ -75,8 +74,7 @@ app.get('/health', (_, res) => {
   });
 });
 
-// API Documentation
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerUiOptions));
+
 
 // API Routes
 app.use('/api/v1/auth', authRoutes);

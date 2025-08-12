@@ -161,8 +161,14 @@ const config: Config = {
     refreshExpiresIn: parseEnvVar.string('JWT_REFRESH_EXPIRES_IN', '7d')
   },
   
-  cors: {
-    origin: parseEnvVar.array('CORS_ORIGIN', ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000', 'http://localhost:3001']),
+    cors: {
+    origin: parseEnvVar.array('CORS_ORIGIN', [
+      'http://localhost:5173', 
+      'http://localhost:5174', 
+      'http://localhost:3000', 
+      'http://localhost:3001',
+      'https://project-management-app-ssgp.onrender.com'
+    ]),
     credentials: parseEnvVar.boolean('CORS_CREDENTIALS', true)
   },
   

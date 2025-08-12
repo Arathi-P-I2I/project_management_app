@@ -41,7 +41,13 @@ export const getJwtConfig = () => ({
  * CORS configuration helpers
  */
 export const getCorsConfig = () => ({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000', 'http://localhost:3001'],
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:5174', 
+    'http://localhost:3000', 
+    'http://localhost:3001',
+    'https://project-management-app-ssgp.onrender.com' // Production frontend
+  ],
   credentials: config.cors.credentials,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],

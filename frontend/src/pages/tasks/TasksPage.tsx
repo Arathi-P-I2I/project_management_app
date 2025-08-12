@@ -644,7 +644,7 @@ export const TasksPage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: { xs: 1, sm: 2 }, minHeight: '100vh', overflow: 'hidden' }}>
+    <Box sx={{ p: { xs: 1, sm: 2 }, height: 'calc(100vh - 100px)', overflow: 'auto' }}>
       {/* Header */}
       <Box sx={{ 
         display: 'flex', 

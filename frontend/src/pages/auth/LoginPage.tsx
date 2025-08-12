@@ -5,11 +5,13 @@ import {
   TextField,
   Button,
   Typography,
-  Link,
   Alert,
   CircularProgress,
   Container,
+  InputAdornment,
+  IconButton,
 } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../store';
@@ -18,10 +20,11 @@ import { login, clearError } from '../../store/slices/authSlice';
 
 export const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: 'admin@projectmanagement.com',
+    password: 'admin123',
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -72,6 +75,10 @@ export const LoginPage: React.FC = () => {
     }
   };
 
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(prev => !prev);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -99,73 +106,159 @@ export const LoginPage: React.FC = () => {
         <Paper
           elevation={3}
           sx={{
-            padding: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            padding: 5,
             width: '100%',
+            minHeight: 'fit-content',
+            position: 'relative',
           }}
         >
-          <Typography component="h1" variant="h4" sx={{ mb: 3 }}>
-            Sign In
-          </Typography>
-
-          {error && (
-            <Alert severity="error" sx={{ width: '100%', mb: 2 }}>
-              {error}
-            </Alert>
-          )}
-
-          <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={formData.email}
-              onChange={handleInputChange}
-              error={!!errors.email}
-              helperText={errors.email}
-              disabled={isLoading}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={formData.password}
-              onChange={handleInputChange}
-              error={!!errors.password}
-              helperText={errors.password}
-              disabled={isLoading}
-            />
-            <Box sx={{ textAlign: 'right', mt: 1 }}>
-              <Link href="/forgot-password" variant="body2">
-                Forgot password?
-              </Link>
-            </Box>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              disabled={isLoading}
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center',
+            width: '100%',
+          }}>
+            <Typography 
+              component="h1" 
+              variant="h4" 
+              sx={{ 
+                mb: 3,
+                width: '100%',
+                textAlign: 'center',
+                fontWeight: 600,
+              }}
             >
-              {isLoading ? <CircularProgress size={24} /> : 'Sign In'}
-            </Button>
-            
-            <Box sx={{ textAlign: 'center' }}>
-              <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              Sign In
+            </Typography>
+
+            {error && (
+              <Alert severity="error" sx={{ width: '100%', mb: 2 }}>
+                {error}
+              </Alert>
+            )}
+
+            <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', mt: 2 }}>
+              <TextField
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={formData.email}
+                onChange={handleInputChange}
+                error={!!errors.email}
+                helperText={errors.email}
+                disabled={isLoading}
+                sx={{ mb: 2 }}
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    backgroundColor: 'transparent !important',
+                    color: 'black !important',
+                    '& input': {
+                      color: 'black !important',
+                    },
+                    '& input::placeholder': {
+                      color: 'black !important',
+                      opacity: 1,
+                    },
+                    '&.Mui-focused': {
+                      backgroundColor: 'transparent !important',
+                    },
+                    '&.Mui-filled': {
+                      backgroundColor: 'transparent !important',
+                    },
+                    '& fieldset': {
+                      borderColor: 'rgba(0, 0, 0, 0.23)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(0, 0, 0, 0.87)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1976d2',
+                    },
+                  }
+                }}
+                InputLabelProps={{
+                  sx: {
+                    backgroundColor: 'white',
+                    px: 1,
+                  }
+                }}
+              />
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                autoComplete="current-password"
+                value={formData.password}
+                onChange={handleInputChange}
+                error={!!errors.password}
+                helperText={errors.password}
+                disabled={isLoading}
+                sx={{ mb: 2 }}
+                variant="outlined"
+                InputProps={{
+                  sx: {
+                    backgroundColor: 'transparent !important',
+                    color: 'black !important',
+                    '& input': {
+                      color: 'black !important',
+                    },
+                    '& input::placeholder': {
+                      color: 'black !important',
+                      opacity: 1,
+                    },
+                    '&.Mui-focused': {
+                      backgroundColor: 'transparent !important',
+                    },
+                    '&.Mui-filled': {
+                      backgroundColor: 'transparent !important',
+                    },
+                    '& fieldset': {
+                      borderColor: 'rgba(0, 0, 0, 0.23)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(0, 0, 0, 0.87)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1976d2',
+                    },
+                  },
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleTogglePasswordVisibility}
+                        edge="end"
+                        disabled={isLoading}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                InputLabelProps={{
+                  sx: {
+                    backgroundColor: 'white',
+                    px: 1,
+                  }
+                }}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                disabled={isLoading}
+              >
+                {isLoading ? <CircularProgress size={24} /> : 'Sign In'}
+              </Button>
             </Box>
           </Box>
         </Paper>

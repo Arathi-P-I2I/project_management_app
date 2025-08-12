@@ -8,7 +8,6 @@ import { Layout } from './layout/Layout';
 // Pages
 import { LoginPage } from '../pages/auth/LoginPage';
 import { RegisterPage } from '../pages/auth/RegisterPage';
-import PasswordResetFlow from './auth/PasswordResetFlow';
 import { DashboardPage } from '../pages/dashboard/DashboardPage';
 import { ProjectsPage } from '../pages/projects/ProjectsPage';
 import { TasksPage } from '../pages/tasks/TasksPage';
@@ -22,10 +21,6 @@ export const AppRoutes: React.FC = () => {
       {/* Public Routes */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route 
-        path="/forgot-password" 
-        element={<PasswordResetFlow onBackToLogin={() => navigate('/login')} />} 
-      />
       
       {/* Protected Routes */}
       <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>

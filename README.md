@@ -102,6 +102,28 @@ npx prisma generate
 npm run db:seed
 ```
 
+## 🔐 Test User Credentials
+
+After setting up the database and running the seed script, you can use these test accounts to explore the application:
+
+### **Admin User**
+- **Email**: `admin@projectmanagement.com`
+- **Password**: `admin123`
+- **Role**: Admin (Full access to all features)
+
+### **Manager User**
+- **Email**: `manager@projectmanagement.com`
+- **Password**: `manager123`
+- **Role**: Manager (Can manage projects and assign tasks)
+
+### **Regular User**
+- **Email**: `user@projectmanagement.com`
+- **Password**: `user123`
+- **Role**: User (Can view assigned tasks and projects)
+
+### **Demo Data**
+The seed script creates sample projects, tasks, and team members to help you explore the application features immediately after setup.
+
 ## 📁 Project Structure
 
 ```

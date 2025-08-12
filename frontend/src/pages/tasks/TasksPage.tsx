@@ -491,29 +491,18 @@ export const TasksPage: React.FC = () => {
       <Box sx={{ 
         display: 'flex', 
         gap: { xs: 1, sm: 2 }, 
-        overflowX: 'auto', 
-        overflowY: 'hidden',
+        flexWrap: 'wrap',
         pb: 1,
         maxWidth: '100%',
         width: '100%',
-        '&::-webkit-scrollbar': {
-          height: 8,
-        },
-        '&::-webkit-scrollbar-track': {
-          backgroundColor: 'grey.100',
-          borderRadius: 4,
-        },
-        '&::-webkit-scrollbar-thumb': {
-          backgroundColor: 'grey.400',
-          borderRadius: 4,
-        },
+        justifyContent: { xs: 'center', sm: 'flex-start' }
       }}>
         {columns.map((column) => (
           <Paper 
             key={column.id} 
             sx={{ 
-              minWidth: { xs: 200, sm: 250, md: 280 }, 
-              maxWidth: { xs: 200, sm: 250, md: 280 },
+              minWidth: { xs: 280, sm: 300, md: 320 }, 
+              maxWidth: { xs: 280, sm: 300, md: 320 },
               p: { xs: 1, sm: 1.5 }, 
               bgcolor: column.bgColor,
               border: '1px solid',
@@ -521,7 +510,8 @@ export const TasksPage: React.FC = () => {
               borderRadius: 2,
               boxShadow: 2,
               flexShrink: 0,
-              overflow: 'hidden'
+              overflow: 'hidden',
+              mb: { xs: 1, sm: 0 }
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>

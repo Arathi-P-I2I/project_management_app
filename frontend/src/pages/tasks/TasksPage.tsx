@@ -492,7 +492,10 @@ export const TasksPage: React.FC = () => {
         display: 'flex', 
         gap: { xs: 1, sm: 2 }, 
         overflowX: 'auto', 
+        overflowY: 'hidden',
         pb: 1,
+        maxWidth: '100%',
+        width: '100%',
         '&::-webkit-scrollbar': {
           height: 8,
         },
@@ -509,15 +512,16 @@ export const TasksPage: React.FC = () => {
           <Paper 
             key={column.id} 
             sx={{ 
-              minWidth: { xs: 250, sm: 280 }, 
-              maxWidth: { xs: 250, sm: 280 },
+              minWidth: { xs: 200, sm: 250, md: 280 }, 
+              maxWidth: { xs: 200, sm: 250, md: 280 },
               p: { xs: 1, sm: 1.5 }, 
               bgcolor: column.bgColor,
               border: '1px solid',
               borderColor: `${column.color}20`,
               borderRadius: 2,
               boxShadow: 2,
-              flexShrink: 0
+              flexShrink: 0,
+              overflow: 'hidden'
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
@@ -546,12 +550,14 @@ export const TasksPage: React.FC = () => {
                   <Typography variant="body2">No tasks</Typography>
                 </Box>
               ) : (
+                // Single task per row for optimal readability
                 column.tasks.map((task) => (
                   <Card 
                     key={task.id} 
                     sx={{ 
                       cursor: 'pointer',
                       transition: 'all 0.2s',
+                      width: '100%',
                       '&:hover': {
                         transform: 'translateY(-2px)',
                         boxShadow: 4
@@ -565,14 +571,14 @@ export const TasksPage: React.FC = () => {
                           label={task.priority}
                           color={getPriorityColor(task.priority) as any}
                           size="small"
-                          sx={{ fontSize: '0.6rem' }}
+                          sx={{ fontSize: '0.6rem', height: 18 }}
                         />
                         {task.dueDate && new Date(task.dueDate) < new Date() && task.status !== 'DONE' && (
                           <Chip
                             label="Overdue"
                             color="error"
                             size="small"
-                            sx={{ fontSize: '0.6rem' }}
+                            sx={{ fontSize: '0.6rem', height: 18 }}
                           />
                         )}
                       </Box>
@@ -644,7 +650,14 @@ export const TasksPage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: { xs: 1, sm: 2 }, height: 'calc(100vh - 100px)', overflow: 'auto' }}>
+    <Box sx={{ 
+      p: { xs: 1, sm: 2 }, 
+      height: 'calc(100vh - 100px)', 
+      overflow: 'auto',
+      maxWidth: '100vw',
+      width: '100%',
+      boxSizing: 'border-box'
+    }}>
       {/* Header */}
       <Box sx={{ 
         display: 'flex', 
@@ -736,13 +749,18 @@ export const TasksPage: React.FC = () => {
 
       {/* Content */}
       {!isLoading && (
-        <>
+        <Box sx={{ 
+          width: '100%', 
+          maxWidth: '100%', 
+          overflow: 'hidden',
+          position: 'relative'
+        }}>
           {viewMode === 'board' ? (
             <KanbanBoard tasks={filteredTasks} />
           ) : (
             <TaskList tasks={filteredTasks} />
           )}
-        </>
+        </Box>
       )}
 
              {/* Task Form Dialog */}

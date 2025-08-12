@@ -488,18 +488,36 @@ export const TasksPage: React.FC = () => {
     ];
 
     return (
-      <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto', pb: 1 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        gap: { xs: 1, sm: 2 }, 
+        overflowX: 'auto', 
+        pb: 1,
+        '&::-webkit-scrollbar': {
+          height: 8,
+        },
+        '&::-webkit-scrollbar-track': {
+          backgroundColor: 'grey.100',
+          borderRadius: 4,
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: 'grey.400',
+          borderRadius: 4,
+        },
+      }}>
         {columns.map((column) => (
           <Paper 
             key={column.id} 
             sx={{ 
-              minWidth: 280, 
-              p: 1.5, 
+              minWidth: { xs: 250, sm: 280 }, 
+              maxWidth: { xs: 250, sm: 280 },
+              p: { xs: 1, sm: 1.5 }, 
               bgcolor: column.bgColor,
               border: '1px solid',
               borderColor: `${column.color}20`,
               borderRadius: 2,
-              boxShadow: 2
+              boxShadow: 2,
+              flexShrink: 0
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
@@ -541,8 +559,8 @@ export const TasksPage: React.FC = () => {
                     }} 
                     onClick={() => handleViewTask(task)}
                   >
-                    <CardContent sx={{ p: 1.5 }}>
-                      <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 0.5, mb: 1 }}>
+                    <CardContent sx={{ p: { xs: 1, sm: 1.5 } }}>
+                      <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 0.5, mb: 1, flexWrap: 'wrap' }}>
                         <Chip
                           label={task.priority}
                           color={getPriorityColor(task.priority) as any}
@@ -558,15 +576,43 @@ export const TasksPage: React.FC = () => {
                           />
                         )}
                       </Box>
-                      <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 600, lineHeight: 1.3, fontSize: '0.9rem' }}>
+                      <Typography 
+                        variant="subtitle2" 
+                        gutterBottom 
+                        sx={{ 
+                          fontWeight: 600, 
+                          lineHeight: 1.3, 
+                          fontSize: '0.9rem',
+                          wordBreak: 'break-word',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical'
+                        }}
+                      >
                         {task.title}
                       </Typography>
                       {task.description && (
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1, lineHeight: 1.4, fontSize: '0.8rem' }}>
+                        <Typography 
+                          variant="body2" 
+                          color="text.secondary" 
+                          sx={{ 
+                            mb: 1, 
+                            lineHeight: 1.4, 
+                            fontSize: '0.8rem',
+                            wordBreak: 'break-word',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical'
+                          }}
+                        >
                           {task.description.length > 50 ? `${task.description.substring(0, 50)}...` : task.description}
                         </Typography>
                       )}
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1, flexWrap: 'wrap' }}>
                         {task.assignee && (
                           <Avatar sx={{ width: 20, height: 20, fontSize: '0.7rem' }}>
                             {task.assignee.firstName.charAt(0)}
@@ -598,10 +644,17 @@ export const TasksPage: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 2, height: '100vh', overflow: 'auto' }}>
+    <Box sx={{ p: { xs: 1, sm: 2 }, minHeight: '100vh', overflow: 'hidden' }}>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Box>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        justifyContent: 'space-between', 
+        alignItems: { xs: 'flex-start', sm: 'center' }, 
+        mb: 2,
+        gap: { xs: 1, sm: 0 }
+      }}>
+        <Box sx={{ flex: 1 }}>
           <Typography variant="h5" component="h1" gutterBottom sx={{ fontWeight: 700, color: 'primary.main' }}>
             Tasks
           </Typography>
@@ -609,7 +662,12 @@ export const TasksPage: React.FC = () => {
             Manage and track your project tasks efficiently
           </Typography>
         </Box>
-        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: 1, 
+          alignItems: 'center',
+          flexWrap: 'wrap'
+        }}>
           <Button
             variant="outlined"
             startIcon={viewMode === 'list' ? <BoardIcon /> : <ListIcon />}
@@ -639,7 +697,7 @@ export const TasksPage: React.FC = () => {
       <TaskStats stats={taskStats} />
 
       {/* Search and Filters */}
-      <Paper sx={{ p: 1.5, mb: 2 }}>
+      <Paper sx={{ p: { xs: 1, sm: 1.5 }, mb: 2 }}>
         <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center', flexWrap: 'wrap' }}>
           <TextField
             placeholder="Search tasks..."
@@ -653,7 +711,10 @@ export const TasksPage: React.FC = () => {
                 </IconButton>
               ),
             }}
-            sx={{ minWidth: 250 }}
+            sx={{ 
+              minWidth: { xs: '100%', sm: 250 },
+              maxWidth: { xs: '100%', sm: 'none' }
+            }}
             size="small"
           />
         </Box>
@@ -862,7 +923,12 @@ export const TasksPage: React.FC = () => {
       <Fab
         color="primary"
         aria-label="add task"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        sx={{ 
+          position: 'fixed', 
+          bottom: { xs: 16, sm: 24 }, 
+          right: { xs: 16, sm: 24 },
+          zIndex: 1000
+        }}
         onClick={handleCreateTask}
       >
         <AddIcon />

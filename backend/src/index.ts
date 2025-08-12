@@ -62,6 +62,23 @@ app.use(morgan(isDevelopment() ? 'dev' : 'combined')); // Additional logging
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// Root endpoint
+app.get('/', (_, res) => {
+  res.status(200).json({
+    message: 'Project Management API',
+    version: config.app.version,
+    environment: config.app.environment,
+    endpoints: {
+      health: '/health',
+      auth: '/api/v1/auth',
+      users: '/api/v1/users',
+      projects: '/api/v1/projects',
+      tasks: '/api/v1/tasks'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Health check endpoint
 app.get('/health', (_, res) => {
   res.status(200).json({
